@@ -15,7 +15,11 @@ async function loadPdfjs() {
 
 export async function pdfToText(buf, onProg) {
   const lib = await loadPdfjs();
-  const pdf = await lib.getDocument({ data: buf, isEvalSupported: false }).promise;
+  const pdf = await lib.getDocument({
+    data: buf,
+    isEvalSupported: false,
+    standardFontDataUrl: `${import.meta.env.BASE_URL}standard_fonts/`,
+  }).promise;
   const numPages = Math.min(pdf.numPages, MAX_PAGES);
   const out = [];
   let chars = 0;
