@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Handwriter</title>
+<meta name="description" content="Upload a typed or handwritten PDF and get a realistic handwritten copy, with 16 handwriting styles, paper types and human mistakes.">
+<meta property="og:title" content="Handwriter — turn notes into real-looking handwriting">
+<meta property="og:description" content="Upload a PDF and get a realistic handwritten copy.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Homemade+Apple&family=Indie+Flower&family=Shadows+Into+Light&family=Kalam:wght@300;400&family=Patrick+Hand&family=Nanum+Pen+Script&family=Reenie+Beanie&family=Gochi+Hand&family=Dancing+Script&family=Covered+By+Your+Grace&family=Just+Another+Hand&family=La+Belle+Aurore&family=Cedarville+Cursive&family=Zeyada&family=Dawning+of+a+New+Day&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<header>
+  <h1>✍ Handwriter</h1>
+  <p>Upload a typed or handwritten PDF and get a realistic handwritten copy.</p>
+</header>
+
+<main class="app">
+  <aside class="panel">
+    <section class="card">
+      <h2>1 · Your note</h2>
+      <label class="drop" id="drop">
+        <input type="file" id="file" accept=".pdf,image/*,.txt,.md" hidden>
+        <b>Drop a PDF here or click to browse</b>
+        <small>Typed PDF, scanned/handwritten PDF (OCR), image or .txt</small>
+      </label>
+      <div class="status" id="status"></div>
+      <textarea id="text" spellcheck="false"></textarea>
+      <span class="hint">Edit the text freely. <code># </code> starts a heading, <code>- </code> a bullet, and a blank line skips a line.</span>
+    </section>
+
+    <section class="card">
+      <h2>2 · Handwriting</h2>
+      <div class="fonts" id="fonts"></div>
+      <label class="btn small">Upload your own font (.ttf / .otf / .woff)
+        <input type="file" id="fontFile" accept=".ttf,.otf,.woff,.woff2" hidden>
+      </label>
+      <div class="row"><label for="size">Size</label><input type="range" id="size" min="20" max="60" value="40"><output></output></div>
+      <div class="row"><label for="slant">Slant</label><input type="range" id="slant" min="-20" max="25" value="5"><output></output></div>
+      <div class="row"><label for="wordSpacing">Word spacing</label><input type="range" id="wordSpacing" min="60" max="220" value="110"><output></output></div>
+    </section>
+
+    <section class="card">
+      <h2>3 · Pen &amp; paper</h2>
+      <div class="sub">Ink</div>
+      <div class="chips" id="inks"></div>
+      <div class="row"><label for="pen">Pen thickness</label><input type="range" id="pen" min="0" max="30" value="7"><output></output></div>
+      <div class="sub">Paper</div>
+      <div class="chips" id="papers"></div>
+      <div class="row"><label for="gap">Line spacing</label><input type="range" id="gap" min="38" max="80" value="52"><output></output></div>
+      <div class="toggles">
+        <label><input type="checkbox" id="marginLine" checked> Margin line</label>
+        <label><input type="checkbox" id="indent" checked> Indent paragraphs</label>
+        <label><input type="checkbox" id="pageNums"> Page numbers</label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>4 · Realism</h2>
+      <div class="row"><label for="mess">Messiness</label><input type="range" id="mess" min="0" max="100" value="40"><output></output></div>
+      <div class="row"><label for="mistakes">Mistakes</label><input type="range" id="mistakes" min="0" max="100" value="30"><output></output></div>
+      <div class="row"><label for="inkFlow">Ink unevenness</label><input type="range" id="inkFlow" min="0" max="100" value="45"><output></output></div>
+      <div class="row"><label for="look">Look</label><select id="look">
+        <option value="clean">Clean digital</option>
+        <option value="scan" selected>Scanned</option>
+        <option value="photo">Phone photo</option>
+      </select><span></span></div>
+      <div class="toggles">
+        <label><input type="checkbox" id="fatigue" checked> Hand gets tired down the page</label>
+      </div>
+    </section>
+  </aside>
+
+  <section class="preview">
+    <div class="bar">
+      <span class="info" id="info">Rendering…</span>
+      <button class="btn" id="reroll" title="Same settings, new random variations">🎲 Re-roll</button>
+      <button class="btn" id="dlPng">Save PNGs</button>
+      <button class="btn primary" id="dlPdf">Download PDF</button>
+    </div>
+    <div id="pages"></div>
+  </section>
+</main>
+
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
